@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Producentansvar for emballage — KiDS Coolshop Amager</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+  :root {
+    --red: #E8002D;
+    --red-light: #ffeef2;
+    --red-dark: #b5001f;
+    --navy: #1a2540;
+    --navy-mid: #2d3d5c;
+    --text: #1a1a2e;
+    --text-mid: #4a5568;
+    --text-muted: #8a95a3;
+    --border: #e2e8f0;
+    --bg: #f8f9fc;
+    --white: #ffffff;
+    --green: #0f6e56;
+    --green-light: #e1f5ee;
+    --green-dark: #085041;
+    --amber: #ba7517;
+    --amber-light: #faeeda;
+    --blue: #185fa5;
+    --blue-light: #e6f1fb;
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--navy);
+    color: white;
+    padding: 2rem 2rem 1.75rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--red);
+  }
+  .header-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .logo-mark {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 6px;
+  }
+  .logo-mark span { color: var(--red); }
+  header h1 {
+    font-size: 22px;
+    font-weight: 600;
+    color: white;
+    line-height: 1.3;
+  }
+  header p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 4px;
+  }
+  .header-badge {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: var(--radius-sm);
+    padding: 6px 12px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* NAV TABS */
+  nav {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .nav-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    background: none;
+    border: none;
+    padding: 14px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--red); border-bottom-color: var(--red); }
+
+  /* MAIN */
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* CARDS */
+  .card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .card p { font-size: 14px; color: var(--text-mid); }
+
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+  .badge-ok { background: var(--green-light); color: var(--green-dark); }
+  .badge-warn { background: var(--amber-light); color: #633806; }
+  .badge-info { background: var(--blue-light); color: #0c447c; }
+  .badge-danger { background: #fcebeb; color: #501313; }
+
+  .pill-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+  .pill {
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    background: var(--bg);
+  }
+
+  /* SECTION HEADINGS */
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 6px;
+  }
+  .section-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .section-sub {
+    font-size: 14px;
+    color: var(--text-mid);
+    margin-bottom: 1.5rem;
+  }
+
+  hr.divider { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+
+  /* STEPS */
+  .step-row { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+  .step-num {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--navy); color: white;
+    font-size: 12px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .step-text { font-size: 14px; color: var(--text-mid); line-height: 1.6; }
+  .step-text strong { color: var(--text); }
+
+  /* CHECKER */
+  .checker-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+  @media(max-width:500px) { .checker-grid { grid-template-columns: 1fr; } }
+
+  .field-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-mid);
+    margin-bottom: 5px;
+    display: block;
+  }
+  input[type=number] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: white;
+    transition: border-color 0.15s;
+  }
+  input[type=number]:focus { outline: none; border-color: var(--navy); }
+  .field-hint { font-size: 12px; color: var(--text-muted); margin-top: 4px; font-style: italic; }
+
+  .check-btn {
+    background: var(--navy);
+    color: white;
+    border: none;
+    padding: 11px 24px;
+    border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s;
+    margin-top: 4px;
+  }
+  .check-btn:hover { background: var(--navy-mid); }
+
+  .result-box {
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    margin-top: 1rem;
+    display: none;
+  }
+  .result-box.mikro { background: var(--green-light); border: 1px solid #9fe1cb; }
+  .result-box.forenklet { background: var(--blue-light); border: 1px solid #b5d4f4; }
+  .result-box.fuld { background: var(--amber-light); border: 1px solid #fac775; }
+  .result-title { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+  .result-box.mikro .result-title { color: var(--green-dark); }
+  .result-box.forenklet .result-title { color: #0c447c; }
+  .result-box.fuld .result-title { color: #633806; }
+  .result-body { font-size: 14px; }
+  .result-box.mikro .result-body { color: var(--green); }
+  .result-box.forenklet .result-body { color: var(--blue); }
+  .result-box.fuld .result-body { color: var(--amber); }
+  .result-action {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  /* OVERVIEW CARDS */
+  .overview-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+  .ov-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+  }
+  .ov-inner { background: var(--bg); border-radius: var(--radius-sm); padding: 1rem; margin-top: 10px; }
+  .ov-inner ol { padding-left: 1.2rem; }
+  .ov-inner li { font-size: 13px; color: var(--text-mid); margin-bottom: 6px; }
+  .ov-inner a { color: var(--blue); }
+
+  /* BEREGNER */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 1.25rem;
+  }
+  @media(max-width:600px) { .metrics-grid { grid-template-columns: repeat(2,1fr); } }
+  .metric {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+  }
+  .metric-label { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
+  .metric-value { font-size: 20px; font-weight: 600; color: var(--text); }
+  .metric-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+  .alert-bar {
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    display: none;
+  }
+  .alert-ok { background: var(--green-light); color: var(--green-dark); border: 1px solid #9fe1cb; }
+  .alert-warn { background: var(--amber-light); color: #633806; border: 1px solid #fac775; }
+
+  .filter-row {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    align-items: flex-end; margin-bottom: 12px;
+  }
+  .filter-row label { font-size: 12px; color: var(--text-mid); display: block; margin-bottom: 4px; font-weight: 500; }
+  .filter-row input[type=text], .filter-row select {
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    background: white;
+    min-width: 130px;
+  }
+  .reset-btn {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 8px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--text-mid);
+    cursor: pointer;
+  }
+  .reset-btn:hover { background: var(--bg); }
+
+  .tbl-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  thead { background: var(--bg); }
+  th {
+    text-align: left;
+    font-weight: 600;
+    font-size: 11px;
+    color: var(--text-muted);
+    padding: 8px 8px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    white-space: nowrap;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    user-select: none;
+  }
+  th:hover { color: var(--text); }
+  td {
+    padding: 7px 8px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: middle;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #fafbfd; }
+  td.muted { color: var(--text-muted); font-size: 11px; font-family: 'DM Mono', monospace; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; font-family: 'DM Mono', monospace; }
+  td.zero { text-align: right; color: var(--text-muted); }
+
+  input.qty-input {
+    width: 72px;
+    text-align: right;
+    padding: 4px 7px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--text);
+  }
+  input.qty-input:focus { outline: none; border-color: var(--navy); }
+
+  .land-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+  }
+  .land-CHN { background: #faeeda; color: #633806; }
+  .land-CZE { background: var(--blue-light); color: #0c447c; }
+  .land-DEU { background: #f1efe8; color: #444441; }
+  .land-USA { background: #fcebeb; color: #501313; }
+
+  .brand-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text-mid);
+  }
+
+  tfoot td {
+    font-weight: 600;
+    background: var(--navy);
+    color: white;
+    padding: 8px 8px;
+    font-size: 12px;
+    border-top: 2px solid var(--navy-mid);
+  }
+  tfoot td.num { font-family: 'DM Mono', monospace; }
+  .sort-arrow { font-size: 9px; margin-left: 3px; }
+
+  .note-box {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--red);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--text-mid);
+    margin-bottom: 1rem;
+  }
+
+  footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div>
+      <div class="logo-mark">KiDS Coolshop <span>—</span> KiDS Coolshop Amager</div>
+      <h1>Producentansvar for emballage</h1>
+      <p>KiDS Coolshop Amager</p>
+    </div>
+    <div class="header-badge">CVR 41345225 &nbsp;·&nbsp; April 2026</div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <button class="tab-btn active" onclick="showTab('vejledning')">Vejledning</button>
+    <button class="tab-btn" onclick="showTab('tjekker')">Mikrovirksomhed?</button>
+    <button class="tab-btn" onclick="showTab('beregner')">Emballageberegner</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ═══════════════════════════════════════════════════ VEJLEDNING -->
+<div id="tab-vejledning" class="section active">
+
+  <div class="section-label">Hvad og hvorfor</div>
+  <div class="section-title">Producentansvar for emballage</div>
+  <div class="section-sub">Siden 1. oktober 2025 er alle danske virksomheder, der importerer emballerede produkter, forpligtede til at finansiere håndtering af det emballageaffald de bringer på markedet.</div>
+
+  <div class="card">
+    <div class="card-title">Grundreglen</div>
+    <p>Den virksomhed der <strong>første gang sætter et emballeret produkt på det danske marked</strong>, har producentansvaret for emballagen. Det gælder uanset virksomhedens størrelse, med visse undtagelser for mikrovirksomheder.</p>
+  </div>
+
+  <hr class="divider">
+  <div class="card-title" style="margin-bottom:10px;">Hvem har ansvaret i din butik?</div>
+
+  <div class="card">
+    <span class="badge badge-ok">Ingen handling nødvendig</span>
+    <div class="card-title">Købt via dansk distributør</div>
+    <p>Størstedelen af jeres varer kommer fra danske distributører. De har allerede registreret sig og håndteret producentansvaret. Du er ikke forpligtet for disse varer.</p>
+  </div>
+
+  <div class="card">
+    <span class="badge badge-warn">Du kan være forpligtet</span>
+    <div class="card-title">Købt direkte fra udlandet</div>
+    <p>Hvis du køber direkte fra en udenlandsk leverandør, er du den første der sætter produktet på det danske marked. Producentansvaret for emballagen ligger hos dig.</p>
+    <div class="pill-row">
+      <span class="pill">Brio AB, Sverige</span>
+      <span class="pill">Bruder via Tactics, Finland</span>
+    </div>
+    <p style="font-size:13px; color:var(--text-muted); margin-top:8px; font-style:italic;">For disse to brands gælder det for alle KiDS Coolshop butikker der køber direkte.</p>
+  </div>
+
+  <hr class="divider">
+  <div class="card-title" style="margin-bottom:12px;">Hvad tæller som emballage?</div>
+  <div class="card">
+    <p style="margin-bottom:8px;">Al emballage produktet ankommer i fra leverandøren:</p>
+    <ul style="padding-left:1.2rem; font-size:14px; color:var(--text-mid);">
+      <li style="margin-bottom:4px;">Salgsemballage: æske, folie, net, blister m.m. som forbrugeren ser og kasserer</li>
+      <li style="margin-bottom:4px;">Transportemballage: mastercarton, krympefolie, paller</li>
+    </ul>
+    <p style="margin-top:10px; font-size:13px; color:var(--text-muted);">Bemærk: puslespil og brætspil har salgsemballage = 0 kg, da æsken beholdes til opbevaring og ikke kasseres. Kun transportemballagen (mastercarton) tæller for disse.</p>
+    <p style="margin-top:8px; font-size:13px; color:var(--text-muted);">Emballage du selv køber til butiksdrift (gaveposer, gavepapir m.m.) håndteres via kædekontorets fælles aftale.</p>
+  </div>
+
+  <hr class="divider">
+  <div class="card-title" style="margin-bottom:12px;">Tidslinje og frister</div>
+  <div class="card">
+    <div class="step-row">
+      <div class="step-num">1</div>
+      <div class="step-text"><strong>1. april 2024</strong> — Registreringspligt trådte i kraft. Alle omfattede virksomheder skulle have registreret sig.</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">2</div>
+      <div class="step-text"><strong>1. oktober 2025</strong> — Udvidet producentansvar trådte fuldt i kraft i Danmark.</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">3</div>
+      <div class="step-text"><strong>1. juni hvert år</strong> — Indberetning af faktiske emballagemængder for det foregående år.</div>
+    </div>
+    <div class="step-row" style="margin-bottom:0;">
+      <div class="step-num">4</div>
+      <div class="step-text"><strong>2026 og frem</strong> — Betaling baseret på indberettede mængder. Første betaling for 2025-mængder.</div>
+    </div>
+  </div>
+
+  <div class="note-box">
+    Kontakt kædekontoret (Martin Kærgaard) hvis du er i tvivl om din forpligtelse eller har brug for hjælp til at beregne emballagemængder fra Brio og Bruder. Du er velkommen til at skrive til <a href="mailto:martin@kidscoolshop.dk">martin@kidscoolshop.dk</a>.
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════ TJEKKER -->
+<div id="tab-tjekker" class="section">
+
+  <div class="section-label">Trin 1</div>
+  <div class="section-title">Er din butik en mikrovirksomhed?</div>
+  <div class="section-sub">Mikrovirksomheder er fritaget fra registreringspligt for emballage købt i Danmark. Bemærk: importerer du direkte fra udlandet (Brio, Bruder), er du dog stadig forpligtet for den del, uanset størrelse.</div>
+
+  <div class="card">
+    <p style="font-size:13px; color:var(--text-muted); margin-bottom:14px;">Omsætning og ansatte gælder for hele virksomheden samlet. Drives flere butikker under samme CVR, skal de lægges sammen.</p>
+
+    <div class="checker-grid">
+      <div>
+        <label class="field-label" for="omsaetning">Årlig omsætning (kr.)</label>
+        <input type="number" id="omsaetning" placeholder="fx 4.500.000" min="0">
+      </div>
+      <div>
+        <label class="field-label" for="ansatte">Antal ansatte (FTE, alle afdelinger)</label>
+        <input type="number" id="ansatte" placeholder="fx 8" min="0" step="0.5">
+      </div>
+    </div>
+    <div style="margin-bottom:14px;">
+      <label class="field-label" for="emballage_kg">Anslået emballage fra direkte import pr. år (kg)</label>
+      <input type="number" id="emballage_kg" placeholder="fx 500" min="0" style="max-width:280px;">
+      <div class="field-hint">Kun Brio og Bruder. Brug emballageberegneren til at finde dette tal. Et skøn er fint.</div>
+    </div>
+
+    <button class="check-btn" onclick="checkStatus()">Tjek nu</button>
+
+    <div id="result-box" class="result-box">
+      <div class="result-title" id="result-title"></div>
+      <div class="result-body" id="result-body"></div>
+      <div class="result-action" id="result-action"></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <div class="card-title" style="margin-bottom:12px;">Oversigt: de tre niveauer</div>
+
+  <div class="overview-grid">
+    <div class="ov-card">
+      <span class="badge badge-ok">Mikrovirksomhed</span>
+      <div class="card-title">Under 10 ansatte og omsætning under 15 mio. kr.</div>
+      <p style="font-size:14px; color:var(--text-mid);">Fritaget fra registrerings- og indberetningspligt for emballage købt i Danmark. Importeres der direkte fra udlandet, er der stadig forpligtelse for den del.</p>
+    </div>
+
+    <div class="ov-card">
+      <span class="badge badge-info">Forenklet indberetning</span>
+      <div class="card-title">Ikke mikrovirksomhed, under 8.000 kg emballage/år</div>
+      <p style="font-size:14px; color:var(--text-mid); margin-bottom:10px;">Skal registreres og indberette, men kun samlet kg fordelt på husholdnings- og erhvervsemballage. Ingen opdeling på materialetyper.</p>
+      <div class="ov-inner">
+        <ol>
+          <li>Registrer dig på <a href="https://producentansvar.dk" target="_blank">producentansvar.dk</a></li>
+          <li>Tilmeld en kollektiv ordning (fx VANA eller DPA)</li>
+          <li>Indberet samlet kg: husholdningsemballage + erhvervsemballage</li>
+          <li>Indberetningsfrist: 1. juni hvert år</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="ov-card">
+      <span class="badge badge-warn">Fuld indberetning</span>
+      <div class="card-title">Ikke mikrovirksomhed, 8.000 kg emballage/år eller mere</div>
+      <p style="font-size:14px; color:var(--text-mid); margin-bottom:10px;">Registrering, kollektiv ordning og fuld indberetning opdelt på materialetyper: papir/karton, plast, glas, metal, træ og andet.</p>
+      <div class="ov-inner">
+        <ol>
+          <li>Registrer dig på <a href="https://producentansvar.dk" target="_blank">producentansvar.dk</a></li>
+          <li>Tilmeld en kollektiv ordning (fx VANA eller DPA)</li>
+          <li>Indberet kg pr. materialetype og emballagetype</li>
+          <li>Indberetningsfrist: 1. juni hvert år</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════ BEREGNER -->
+<div id="tab-beregner" class="section">
+
+  <div class="section-label">Trin 2</div>
+  <div class="section-title">Beregn din emballagemængde</div>
+  <div class="section-sub">Angiv antal solgte stk. pr. varenummer. Totalen opdateres løbende og viser om du er under eller over bagatelgrænsen på 8.000 kg.</div>
+
+  <div class="note-box">
+    Salgsemballage = brutto minus netto pr. stk. Puslespil og spil har salgsemballage = 0 kg. Transportemballage = mastercartonens overvægt fordelt pr. stk.
+  </div>
+
+  <div class="metrics-grid">
+    <div class="metric">
+      <div class="metric-label">Salgsemballage</div>
+      <div class="metric-value" id="m-salg">0,0 kg</div>
+      <div class="metric-sub">Kasseres af forbruger</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Transportemballage</div>
+      <div class="metric-value" id="m-mc">0,0 kg</div>
+      <div class="metric-sub">Mastercarton andel</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Samlet emballage</div>
+      <div class="metric-value" id="m-total">0,0 kg</div>
+      <div class="metric-sub" id="m-sub">Angiv antal stk.</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Andel af 8.000 kg</div>
+      <div class="metric-value" id="m-pct">—</div>
+      <div class="metric-sub" id="m-pct-sub">Bagatelgrænse</div>
+    </div>
+  </div>
+
+  <div id="alert-bar" class="alert-bar"></div>
+
+  <div class="filter-row">
+    <div>
+      <label>Søg varenr. / navn</label>
+      <input type="text" id="search" placeholder="fx 33719 eller tog..." oninput="render()">
+    </div>
+    <div>
+      <label>Varemærke</label>
+      <select id="filter-brand" onchange="render()">
+        <option value="">Alle</option>
+        <option value="BRIO">BRIO</option>
+        <option value="Ravensburger">Ravensburger</option>
+        <option value="Alga">Alga</option>
+        <option value="ThinkFun">ThinkFun</option>
+      </select>
+    </div>
+    <div>
+      <label>Vis</label>
+      <select id="filter-qty" onchange="render()">
+        <option value="0">Alle varer</option>
+        <option value="1">Kun udfyldte</option>
+      </select>
+    </div>
+    <div style="align-self:flex-end;">
+      <button class="reset-btn" onclick="clearAll()">Nulstil alle</button>
+    </div>
+    <div style="align-self:flex-end; margin-left:auto;">
+      <button class="check-btn" onclick="downloadCSV()" style="font-size:13px; padding:8px 16px;">Download oversigt</button>
+    </div>
+  </div>
+
+  <div id="tbl-summary" style="background:var(--navy); color:white; border-radius:var(--radius-sm) var(--radius-sm) 0 0; padding:10px 14px; display:flex; gap:2rem; flex-wrap:wrap; font-size:13px;">
+    <span>Filtrerede rækker &mdash; <strong id="sum-salg">0,0 kg</strong> salgsemb. &nbsp;+&nbsp; <strong id="sum-mc">0,0 kg</strong> transport &nbsp;=&nbsp; <strong id="sum-tot">0,0 kg</strong> i alt</span>
+  </div>
+
+  <div class="tbl-wrap" style="border-radius:0 0 var(--radius) var(--radius); border-top:none;">
+    <table>
+      <thead>
+        <tr>
+          <th onclick="sortBy('Varenr')">Varenr <span class="sort-arrow" id="s-Varenr"></span></th>
+          <th onclick="sortBy('Beskrivelse_kort')">Beskrivelse <span class="sort-arrow" id="s-Beskrivelse_kort"></span></th>
+          <th onclick="sortBy('Vaeremaerke')">Mærke <span class="sort-arrow" id="s-Vaeremaerke"></span></th>
+          <th onclick="sortBy('Land')">Land <span class="sort-arrow" id="s-Land"></span></th>
+          <th style="text-align:right;">Salgsemb/stk</th>
+          <th style="text-align:right;">MC/stk</th>
+          <th onclick="sortBy('Total_emb_pr_stk')" style="text-align:right;">Total/stk <span class="sort-arrow" id="s-Total_emb_pr_stk"></span></th>
+          <th style="text-align:right;">Antal købt</th>
+          <th onclick="sortBy('_total')" style="text-align:right;">Total emb. (kg) <span class="sort-arrow" id="s-_total"></span></th>
+        </tr>
+      </thead>
+      <tbody id="tbl-body"></tbody>
+    </table>
+  </div>
+
+</div>
+</main>
+
+<footer>
+  KiDS Coolshop — KiDS Coolshop Amager &nbsp;·&nbsp; CVR 41345225 &nbsp;·&nbsp; April 2026
+</footer>
+
+<script>
+// ── TAB NAVIGATION ──────────────────────────────────────────────
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ── CHECKER ─────────────────────────────────────────────────────
+function checkStatus() {
+  const om  = parseFloat(document.getElementById('omsaetning').value) || 0;
+  const ans = parseFloat(document.getElementById('ansatte').value) || 0;
+  const kg  = parseFloat(document.getElementById('emballage_kg').value) || 0;
+  const ton = kg / 1000;
+
+  const box    = document.getElementById('result-box');
+  const title  = document.getElementById('result-title');
+  const body   = document.getElementById('result-body');
+  const action = document.getElementById('result-action');
+
+  box.style.display = 'block';
+  const isMikro  = ans < 10 && om < 15000000;
+  const forenklet = !isMikro && kg < 8000;
+  const erImport = kg > 0;
+
+  if (isMikro && !erImport) {
+    box.className = 'result-box mikro';
+    title.textContent = 'Du er mikrovirksomhed og har ingen direkte import';
+    body.textContent  = 'Du er fritaget fra alle registrerings- og indberetningspligter. Du behøver ikke foretage dig noget.';
+    action.textContent = 'Gem disse tal som dokumentation, hvis der opstår tvivl.';
+  } else if (isMikro && erImport) {
+    box.className = 'result-box forenklet';
+    title.textContent = 'Du er mikrovirksomhed, men importerer direkte fra udlandet';
+    body.textContent  = 'Mikrovirksomheder er ikke fritaget ved direkte import. Du er forpligtet for emballagen fra Brio og Bruder. Med ' + kg.toLocaleString('da-DK') + ' kg er du under bagatelgrænsen og kan bruge forenklet indberetning.';
+    action.textContent = 'Gå til fanen "Mikrovirksomhed?" og se trin 2 for forenklet indberetning.';
+  } else if (!isMikro && forenklet) {
+    box.className = 'result-box forenklet';
+    title.textContent = 'Forenklet indberetning';
+    body.textContent  = 'Du er ikke mikrovirksomhed, men med ' + kg.toLocaleString('da-DK') + ' kg emballage fra direkte import er du under bagatelgrænsen på 8.000 kg. Du kan bruge den forenklede indberetningsform.';
+    action.textContent = 'Se fanen "Mikrovirksomhed?" for trin-for-trin vejledning.';
+  } else if (!isMikro && !forenklet) {
+    box.className = 'result-box fuld';
+    title.textContent = 'Fuld indberetning';
+    body.textContent  = 'Du er ikke mikrovirksomhed og bringer ' + kg.toLocaleString('da-DK') + ' kg emballage fra direkte import. Det er over bagatelgrænsen på 8.000 kg, og du skal bruge fuld indberetning fordelt på materialetyper.';
+    action.textContent = 'Kontakt kædekontoret for hjælp til materialeopdeling.';
+  } else {
+    box.className = 'result-box forenklet';
+    title.textContent = 'Udfyld alle felter for at få et resultat';
+    body.textContent  = 'Indtast omsætning, antal ansatte og emballagemængde fra direkte import.';
+    action.textContent = '';
+  }
+}
+
+// ── BEREGNER DATA ────────────────────────────────────────────────
+const RAW = [{"Varenr":"30120","Beskrivelse_kort":"BRIO 30120 Klovn","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.17,"MC_pr_stk":0.0483,"Total_emb_pr_stk":0.2183},{"Varenr":"30237","Beskrivelse_kort":"BRIO 30237 Snurrende klovn","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.12,"MC_pr_stk":0.05,"Total_emb_pr_stk":0.17},{"Varenr":"30286","Beskrivelse_kort":"BRIO 30286 Push & Go Lastbil","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.12,"MC_pr_stk":0.1033,"Total_emb_pr_stk":0.2233},{"Varenr":"30306","Beskrivelse_kort":"BRIO 30306 Pull back-racerbil","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.04,"MC_pr_stk":0.0267,"Total_emb_pr_stk":0.0667},{"Varenr":"30332","Beskrivelse_kort":"BRIO 30332 Dachsie, hund, Pull along","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.17,"MC_pr_stk":0.0475,"Total_emb_pr_stk":0.2175},{"Varenr":"33042","Beskrivelse_kort":"BRIO 33042 Togbane, lille skov","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.09,"MC_pr_stk":0.0525,"Total_emb_pr_stk":0.1425},{"Varenr":"33130","Beskrivelse_kort":"BRIO 33130 Batteridrevet godstog","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.06,"MC_pr_stk":0.0233,"Total_emb_pr_stk":0.0833},{"Varenr":"33213","Beskrivelse_kort":"BRIO 33213 Fjernstyret lokomotiv","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.2,"MC_pr_stk":0.0975,"Total_emb_pr_stk":0.2975},{"Varenr":"33319","Beskrivelse_kort":"BRIO 33319 Batteridrevet tog","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.14,"MC_pr_stk":0.065,"Total_emb_pr_stk":0.205},{"Varenr":"33333","Beskrivelse_kort":"BRIO 33333 Lige skinner, mini","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.02,"MC_pr_stk":0.0167,"Total_emb_pr_stk":0.0367},{"Varenr":"33341","Beskrivelse_kort":"BRIO 33341 Lige skinner, lange","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.04,"MC_pr_stk":0.0275,"Total_emb_pr_stk":0.0675},{"Varenr":"33342","Beskrivelse_kort":"BRIO 33342 Buede skinner, lange","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.03,"MC_pr_stk":0.02,"Total_emb_pr_stk":0.05},{"Varenr":"33404","Beskrivelse_kort":"BRIO 33404 Bondegårdssæt","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.11,"MC_pr_stk":0.0533,"Total_emb_pr_stk":0.1633},{"Varenr":"33569","Beskrivelse_kort":"BRIO 33569 Færge med lys og lyd","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.12,"MC_pr_stk":0.0875,"Total_emb_pr_stk":0.2075},{"Varenr":"33574","Beskrivelse_kort":"BRIO 33574 Toggarage","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.12,"MC_pr_stk":0.055,"Total_emb_pr_stk":0.175},{"Varenr":"33592","Beskrivelse_kort":"BRIO 33592 Stort, rødt lokomotiv","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.08,"MC_pr_stk":0.0283,"Total_emb_pr_stk":0.1083},{"Varenr":"33594","Beskrivelse_kort":"BRIO 33594 Batt. tovejs lok. rødt/gult","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.07,"MC_pr_stk":0.0233,"Total_emb_pr_stk":0.0933},{"Varenr":"33595","Beskrivelse_kort":"BRIO 33595 Batt. tovejs lok. grønt/sort","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.07,"MC_pr_stk":0.0233,"Total_emb_pr_stk":0.0933},{"Varenr":"33599","Beskrivelse_kort":"BRIO 33599 Genopladeligt lok. m/USB","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.06,"MC_pr_stk":0.0333,"Total_emb_pr_stk":0.0933},{"Varenr":"33617","Beskrivelse_kort":"BRIO 33617 Gammelt damplokomotiv","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.04,"MC_pr_stk":0.0183,"Total_emb_pr_stk":0.0583},{"Varenr":"33630","Beskrivelse_kort":"BRIO 33630 Guld actionlokomotiv","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.08,"MC_pr_stk":0.035,"Total_emb_pr_stk":0.115},{"Varenr":"33683","Beskrivelse_kort":"BRIO 33683 Hængebro, lang","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.23,"MC_pr_stk":0.1325,"Total_emb_pr_stk":0.3625},{"Varenr":"33696","Beskrivelse_kort":"BRIO 33696 Togvogn med tømmer","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.02,"MC_pr_stk":0.0317,"Total_emb_pr_stk":0.0517},{"Varenr":"33699","Beskrivelse_kort":"BRIO 33699 Bro med opfartsskinner","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.18,"MC_pr_stk":0.09,"Total_emb_pr_stk":0.27},{"Varenr":"33705","Beskrivelse_kort":"BRIO 33705 Mit første batteritog","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.05,"MC_pr_stk":0.0233,"Total_emb_pr_stk":0.0733},{"Varenr":"33709","Beskrivelse_kort":"BRIO 33709 Fleksibel tunnel","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.17,"MC_pr_stk":0.0825,"Total_emb_pr_stk":0.2525},{"Varenr":"33719","Beskrivelse_kort":"BRIO 33719 Togbane Bondegård","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.41,"MC_pr_stk":0.26,"Total_emb_pr_stk":0.67},{"Varenr":"33722","Beskrivelse_kort":"BRIO 33722 Safari Tog","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.11,"MC_pr_stk":0.045,"Total_emb_pr_stk":0.155},{"Varenr":"33724","Beskrivelse_kort":"BRIO 33724 Giraf og vogn","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.04,"MC_pr_stk":0.0183,"Total_emb_pr_stk":0.0583},{"Varenr":"33750","Beskrivelse_kort":"BRIO 33750 Jernbaneoverskæring","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.05,"MC_pr_stk":0.035,"Total_emb_pr_stk":0.085},{"Varenr":"33754","Beskrivelse_kort":"BRIO 33754 Magnetstyret lydsignal","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.03,"MC_pr_stk":0.0238,"Total_emb_pr_stk":0.0538},{"Varenr":"33835","Beskrivelse_kort":"BRIO 33835 Byggekran med lys","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.46,"MC_pr_stk":0.215,"Total_emb_pr_stk":0.675},{"Varenr":"33840","Beskrivelse_kort":"BRIO 33840 Togstation med lydoptager","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.21,"MC_pr_stk":0.075,"Total_emb_pr_stk":0.285},{"Varenr":"33862","Beskrivelse_kort":"BRIO 33862 Jernbaneskilt med lys","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.04,"MC_pr_stk":0.0217,"Total_emb_pr_stk":0.0617},{"Varenr":"33884","Beskrivelse_kort":"BRIO 33884 Batteridrevet damptog","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.1,"MC_pr_stk":0.0333,"Total_emb_pr_stk":0.1333},{"Varenr":"33886","Beskrivelse_kort":"BRIO 33886 Fragthelikopter","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.21,"MC_pr_stk":0.115,"Total_emb_pr_stk":0.325},{"Varenr":"33896","Beskrivelse_kort":"BRIO 33896 Guldvogn med lys","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.06,"MC_pr_stk":0.0233,"Total_emb_pr_stk":0.0833},{"Varenr":"33960","Beskrivelse_kort":"BRIO 33960 Safarieventyrsæt","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.47,"MC_pr_stk":0.165,"Total_emb_pr_stk":0.635},{"Varenr":"33969","Beskrivelse_kort":"BRIO 33969 Elefant og vogn","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.04,"MC_pr_stk":0.0217,"Total_emb_pr_stk":0.0617},{"Varenr":"33970","Beskrivelse_kort":"BRIO 33970 Metrotog med tunnel","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.06,"MC_pr_stk":0.0525,"Total_emb_pr_stk":0.1125},{"Varenr":"34586","Beskrivelse_kort":"BRIO 34586 Builder Startsæt","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.03,"MC_pr_stk":0.0975,"Total_emb_pr_stk":0.1275},{"Varenr":"34587","Beskrivelse_kort":"BRIO 34587 Builder Byggesæt","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.36,"MC_pr_stk":0.1275,"Total_emb_pr_stk":0.4875},{"Varenr":"34598","Beskrivelse_kort":"BRIO 34598 Builder Volvo Wheel Loader","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.34,"MC_pr_stk":0.105,"Total_emb_pr_stk":0.445},{"Varenr":"34605","Beskrivelse_kort":"BRIO 34605 Builder Fjernbetjeningssæt","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.21,"MC_pr_stk":0.115,"Total_emb_pr_stk":0.325},{"Varenr":"36019","Beskrivelse_kort":"BRIO 36019 Pull Back Tog","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.09,"MC_pr_stk":0.0213,"Total_emb_pr_stk":0.1113},{"Varenr":"36028","Beskrivelse_kort":"BRIO 36028 Startsæt Løft & Læs","Vaeremaerke":"BRIO","Land":"CZE","Salgsemb_pr_stk":0.25,"MC_pr_stk":0.11,"Total_emb_pr_stk":0.36},{"Varenr":"36034","Beskrivelse_kort":"BRIO 36034 Minitog og -biler","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.03,"MC_pr_stk":0.0125,"Total_emb_pr_stk":0.0425},{"Varenr":"36035","Beskrivelse_kort":"BRIO 36035 Redningsambulance","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.14,"MC_pr_stk":0.0325,"Total_emb_pr_stk":0.1725},{"Varenr":"36079","Beskrivelse_kort":"BRIO 36079 Startsæt med passagertog","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.58,"MC_pr_stk":0.16,"Total_emb_pr_stk":0.74},{"Varenr":"36082","Beskrivelse_kort":"BRIO 36082 Dinosaur Attack Legesæt","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.2,"MC_pr_stk":0.065,"Total_emb_pr_stk":0.265},{"Varenr":"36092","Beskrivelse_kort":"BRIO 36092 Aktiv vulkan m. dinosaurer","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.32,"MC_pr_stk":0.1425,"Total_emb_pr_stk":0.4625},{"Varenr":"36094","Beskrivelse_kort":"BRIO 36094 Togbanesæt m. dinosaurer","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.46,"MC_pr_stk":0.154,"Total_emb_pr_stk":0.614},{"Varenr":"36096","Beskrivelse_kort":"BRIO 36096 Batt. tog med dinosaur","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.16,"MC_pr_stk":0.054,"Total_emb_pr_stk":0.214},{"Varenr":"36098","Beskrivelse_kort":"BRIO 36098 Cirkelsæt med dinosaur","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.25,"MC_pr_stk":0.0825,"Total_emb_pr_stk":0.3325},{"Varenr":"36099","Beskrivelse_kort":"BRIO 36099 Startpakke skinner","Vaeremaerke":"BRIO","Land":"CZE","Salgsemb_pr_stk":0.1,"MC_pr_stk":0.0375,"Total_emb_pr_stk":0.1375},{"Varenr":"36102","Beskrivelse_kort":"BRIO 36102 Pull Back Togsæt","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.32,"MC_pr_stk":0.0975,"Total_emb_pr_stk":0.4175},{"Varenr":"36107","Beskrivelse_kort":"BRIO 36107 Buet bro","Vaeremaerke":"BRIO","Land":"CZE","Salgsemb_pr_stk":0.08,"MC_pr_stk":0.0483,"Total_emb_pr_stk":0.1283},{"Varenr":"36111","Beskrivelse_kort":"BRIO 36111 Special Edition tog (2025)","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.07,"MC_pr_stk":0.03,"Total_emb_pr_stk":0.1},{"Varenr":"36123","Beskrivelse_kort":"Peppa Pig Train Set","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.15,"MC_pr_stk":0.0875,"Total_emb_pr_stk":0.2375},{"Varenr":"36130","Beskrivelse_kort":"BRIO 36130 Cargoset m. ædelstene","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.13,"MC_pr_stk":0.08,"Total_emb_pr_stk":0.21},{"Varenr":"36140","Beskrivelse_kort":"BRIO 36140 Special Edition tog (2026)","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.03,"MC_pr_stk":0.0333,"Total_emb_pr_stk":0.0633},{"Varenr":"36202","Beskrivelse_kort":"BRIO Flora 36202 Tulip Figur","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.04,"MC_pr_stk":0.0213,"Total_emb_pr_stk":0.0613},{"Varenr":"36204","Beskrivelse_kort":"BRIO Flora 36204 Rose Figur","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.04,"MC_pr_stk":0.02,"Total_emb_pr_stk":0.06},{"Varenr":"36206","Beskrivelse_kort":"BRIO Flora 36206 Magnolia Figur","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.03,"MC_pr_stk":0.0262,"Total_emb_pr_stk":0.0562},{"Varenr":"36208","Beskrivelse_kort":"BRIO Flora 36208 Petunia Figur","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.04,"MC_pr_stk":0.0225,"Total_emb_pr_stk":0.0625},{"Varenr":"36210","Beskrivelse_kort":"BRIO Flora 36210 Aster Blomsterdragt","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.05,"MC_pr_stk":0.032,"Total_emb_pr_stk":0.082},{"Varenr":"36212","Beskrivelse_kort":"BRIO Flora 36212 Dandelion Bladdragt","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.05,"MC_pr_stk":0.032,"Total_emb_pr_stk":0.082},{"Varenr":"36214","Beskrivelse_kort":"BRIO Flora 36214 Lavender & Grape","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.06,"MC_pr_stk":0.028,"Total_emb_pr_stk":0.088},{"Varenr":"36216","Beskrivelse_kort":"BRIO Flora 36216 Zinnia & Peach","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.05,"MC_pr_stk":0.032,"Total_emb_pr_stk":0.082},{"Varenr":"36218","Beskrivelse_kort":"BRIO Flora 36218 Heather Blomsterhus","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.04,"MC_pr_stk":0.1567,"Total_emb_pr_stk":0.1967},{"Varenr":"36220","Beskrivelse_kort":"BRIO Flora 36220 Ivy Blomsterhus","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.04,"MC_pr_stk":0.1567,"Total_emb_pr_stk":0.1967},{"Varenr":"36222","Beskrivelse_kort":"BRIO Flora 36222 Marigold Blomsterhus","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.04,"MC_pr_stk":0.1533,"Total_emb_pr_stk":0.1933},{"Varenr":"36224","Beskrivelse_kort":"BRIO Flora 36224 Poppy Blomsterhus","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.04,"MC_pr_stk":0.1567,"Total_emb_pr_stk":0.1967},{"Varenr":"36228","Beskrivelse_kort":"BRIO Flora 36228 Blomstersamlere","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.16,"MC_pr_stk":0.0533,"Total_emb_pr_stk":0.2133},{"Varenr":"36232","Beskrivelse_kort":"BRIO Flora 36232 Azalea Blomstergynge","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.23,"MC_pr_stk":0.075,"Total_emb_pr_stk":0.305},{"Varenr":"36236","Beskrivelse_kort":"BRIO Flora 36236 Blomsterhus Starter","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.37,"MC_pr_stk":0.12,"Total_emb_pr_stk":0.49},{"Varenr":"36240","Beskrivelse_kort":"BRIO Flora 36240 Blomsterlandsby","Vaeremaerke":"BRIO","Land":"CHN","Salgsemb_pr_stk":0.49,"MC_pr_stk":0.1525,"Total_emb_pr_stk":0.6425},{"Varenr":"38012708","Beskrivelse_kort":"Matador","Vaeremaerke":"Alga","Land":"CHN","Salgsemb_pr_stk":0.06,"MC_pr_stk":0.0617,"Total_emb_pr_stk":0.1217},{"Varenr":"38012709","Beskrivelse_kort":"Afrikas Stjerne","Vaeremaerke":"Alga","Land":"CHN","Salgsemb_pr_stk":0.05,"MC_pr_stk":0.0617,"Total_emb_pr_stk":0.1117},{"Varenr":"38012762","Beskrivelse_kort":"Junior Matador","Vaeremaerke":"Alga","Land":"CHN","Salgsemb_pr_stk":0.06,"MC_pr_stk":0.0517,"Total_emb_pr_stk":0.1117},{"Varenr":"38014796","Beskrivelse_kort":"Othello","Vaeremaerke":"Alga","Land":"CHN","Salgsemb_pr_stk":0.07,"MC_pr_stk":0.1017,"Total_emb_pr_stk":0.1717},{"Varenr":"10103154","Beskrivelse_kort":"Paw Patrol My First Puzzle 2/3/4/5p","Vaeremaerke":"Ravensburger","Land":"CZE","Salgsemb_pr_stk":0.0,"MC_pr_stk":0.0333,"Total_emb_pr_stk":0.0333},{"Varenr":"10105009","Beskrivelse_kort":"Frozen 2 Journey 2x12p","Vaeremaerke":"Ravensburger","Land":"CZE","Salgsemb_pr_stk":0.0,"MC_pr_stk":0.0612,"Total_emb_pr_stk":0.0612},{"Varenr":"10105030","Beskrivelse_kort":"Dinosaurs At Play 2x24p","Vaeremaerke":"Ravensburger","Land":"CZE","Salgsemb_pr_stk":0.0,"MC_pr_stk":0.0612,"Total_emb_pr_stk":0.0612},{"Varenr":"10105032","Beskrivelse_kort":"Digger At Work 3x49p","Vaeremaerke":"Ravensburger","Land":"CZE","Salgsemb_pr_stk":0.0,"MC_pr_stk":0.0625,"Total_emb_pr_stk":0.0625},{"Varenr":"10105128","Beskrivelse_kort":"Dinosaurs Of Land And Sea 2x24p","Vaeremaerke":"Ravensburger","Land":"CZE","Salgsemb_pr_stk":0.0,"MC_pr_stk":0.0612,"Total_emb_pr_stk":0.0612},{"Varenr":"10105246","Beskrivelse_kort":"My Dino Friends 2x12p","Vaeremaerke":"Ravensburger","Land":"CZE","Salgsemb_pr_stk":0.0,"MC_pr_stk":0.0538,"Total_emb_pr_stk":0.0538},{"Varenr":"10105574","Beskrivelse_kort":"Peppas Adventure 2x12p","Vaeremaerke":"Ravensburger","Land":"CZE","Salgsemb_pr_stk":0.0,"MC_pr_stk":0.0538,"Total_emb_pr_stk":0.0538},{"Varenr":"10105621","Beskrivelse_kort":"Minecraft Biomes 3x49p","Vaeremaerke":"Ravensburger","Land":"CZE","Salgsemb_pr_stk":0.0,"MC_pr_stk":0.0475,"Total_emb_pr_stk":0.0475},{"Varenr":"10105631","Beskrivelse_kort":"My Emergency Vehicles 2/4/6/8p","Vaeremaerke":"Ravensburger","Land":"CZE","Salgsemb_pr_stk":0.0,"MC_pr_stk":0.035,"Total_emb_pr_stk":0.035},{"Varenr":"10922410","Beskrivelse_kort":"GraviTrax Starter-set","Vaeremaerke":"Ravensburger","Land":"CZE","Salgsemb_pr_stk":0.0,"MC_pr_stk":0.0,"Total_emb_pr_stk":0.0},{"Varenr":"10922417","Beskrivelse_kort":"GraviTrax Element Trampoline","Vaeremaerke":"Ravensburger","Land":"CZE","Salgsemb_pr_stk":0.0,"MC_pr_stk":0.015,"Total_emb_pr_stk":0.015},{"Varenr":"15076624","Beskrivelse_kort":"Rush Hour Update","Vaeremaerke":"ThinkFun","Land":"CHN","Salgsemb_pr_stk":0.0,"MC_pr_stk":0.08,"Total_emb_pr_stk":0.08},{"Varenr":"12000293","Beskrivelse_kort":"Cozy Cabin 1000p","Vaeremaerke":"Ravensburger","Land":"DEU","Salgsemb_pr_stk":0.0,"MC_pr_stk":0.06,"Total_emb_pr_stk":0.06},{"Varenr":"12000832","Beskrivelse_kort":"Pokémon Adventure 1000p","Vaeremaerke":"Ravensburger","Land":"DEU","Salgsemb_pr_stk":0.0,"MC_pr_stk":0.06,"Total_emb_pr_stk":0.06},{"Varenr":"12001075","Beskrivelse_kort":"Pokémon 100p","Vaeremaerke":"Ravensburger","Land":"DEU","Salgsemb_pr_stk":0.0,"MC_pr_stk":0.0533,"Total_emb_pr_stk":0.0533},{"Varenr":"10216845","Beskrivelse_kort":"Pokémon Allstars 5000p","Vaeremaerke":"Ravensburger","Land":"DEU","Salgsemb_pr_stk":0.0,"MC_pr_stk":0.1125,"Total_emb_pr_stk":0.1125},{"Varenr":"10827037","Beskrivelse_kort":"Pokémon Labyrinth","Vaeremaerke":"Ravensburger","Land":"CZE","Salgsemb_pr_stk":0.0,"MC_pr_stk":0.16,"Total_emb_pr_stk":0.16}];
+
+const qty = {};
+RAW.forEach(r => qty[r.Varenr] = 0);
+let sortCol = null, sortAsc = true;
+
+function f3(n) { return n.toLocaleString('da-DK', {minimumFractionDigits:3,maximumFractionDigits:3}); }
+function f1(n) { return n.toLocaleString('da-DK', {minimumFractionDigits:1,maximumFractionDigits:1}); }
+
+function getTotals() {
+  let s=0,m=0;
+  RAW.forEach(r=>{ const q=qty[r.Varenr]||0; s+=q*r.Salgsemb_pr_stk; m+=q*r.MC_pr_stk; });
+  return {salg:Math.round(s*1000)/1000, mc:Math.round(m*1000)/1000, total:Math.round((s+m)*1000)/1000};
+}
+
+function updateSummary() {
+  const t = getTotals();
+  document.getElementById('m-salg').textContent  = f1(t.salg)  + ' kg';
+  document.getElementById('m-mc').textContent    = f1(t.mc)    + ' kg';
+  document.getElementById('m-total').textContent = f1(t.total) + ' kg';
+  const bar = document.getElementById('alert-bar');
+  if (t.total === 0) {
+    document.getElementById('m-pct').textContent     = '—';
+    document.getElementById('m-pct-sub').textContent = 'Bagatelgrænse';
+    bar.style.display = 'none';
+  } else {
+    const pct = Math.round((t.total/8000)*100);
+    document.getElementById('m-pct').textContent     = pct + '%';
+    document.getElementById('m-pct-sub').textContent = (8000-t.total).toLocaleString('da-DK',{maximumFractionDigits:0}) + ' kg til grænsen';
+    bar.style.display = 'block';
+    if (t.total < 8000) {
+      bar.className = 'alert-bar alert-ok';
+      bar.textContent = 'Under bagatelgrænsen (8.000 kg) — forenklet indberetning er tilstrækkelig. Samlet: ' + f1(t.total) + ' kg (salgsemb. ' + f1(t.salg) + ' kg + transport ' + f1(t.mc) + ' kg).';
+    } else {
+      bar.className = 'alert-bar alert-warn';
+      bar.textContent = 'Over bagatelgrænsen (8.000 kg) — fuld indberetning med materialeopdeling kræves. Samlet: ' + f1(t.total) + ' kg.';
+    }
+  }
+}
+
+function render() {
+  const search   = (document.getElementById('search').value||'').toLowerCase();
+  const brand    = document.getElementById('filter-brand').value;
+  const onlyQty  = document.getElementById('filter-qty').value === '1';
+
+  let data = RAW.filter(r => {
+    if (search && !r.Varenr.toLowerCase().includes(search) && !r.Beskrivelse_kort.toLowerCase().includes(search)) return false;
+    if (brand && r.Vaeremaerke !== brand) return false;
+    if (onlyQty && (qty[r.Varenr]||0) === 0) return false;
+    return true;
+  });
+
+  if (sortCol) {
+    data.sort((a,b) => {
+      let av = sortCol==='_total' ? (qty[a.Varenr]||0)*a.Total_emb_pr_stk : a[sortCol];
+      let bv = sortCol==='_total' ? (qty[b.Varenr]||0)*b.Total_emb_pr_stk : b[sortCol];
+      if (typeof av==='string') { av=av.toLowerCase(); bv=bv.toLowerCase(); }
+      return sortAsc ? (av>bv?1:av<bv?-1:0) : (av<bv?1:av>bv?-1:0);
+    });
+  }
+
+  ['Varenr','Beskrivelse_kort','Vaeremaerke','Land','Total_emb_pr_stk','_total'].forEach(c => {
+    const el = document.getElementById('s-'+c);
+    if (el) el.textContent = sortCol===c ? (sortAsc?'▲':'▼') : '';
+  });
+
+  document.getElementById('tbl-body').innerHTML = data.map(r => {
+    const q   = qty[r.Varenr]||0;
+    const tot = Math.round(q*r.Total_emb_pr_stk*1000)/1000;
+    const sStr = r.Salgsemb_pr_stk>0 ? f3(r.Salgsemb_pr_stk) : '<span style="color:#8a95a3">0</span>';
+    const tStr = tot>0 ? '<strong>'+f3(tot)+'</strong>' : '<span style="color:#8a95a3">—</span>';
+    return `<tr>
+      <td class="muted">${r.Varenr}</td>
+      <td style="max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${r.Beskrivelse_kort}">${r.Beskrivelse_kort}</td>
+      <td><span class="brand-tag">${r.Vaeremaerke}</span></td>
+      <td><span class="land-tag land-${r.Land}">${r.Land}</span></td>
+      <td class="num">${sStr}</td>
+      <td class="num">${f3(r.MC_pr_stk)}</td>
+      <td class="num" style="font-weight:600;">${f3(r.Total_emb_pr_stk)}</td>
+      <td class="num"><input type="number" class="qty-input" min="0" step="1" value="${q}" oninput="setQty('${r.Varenr}',this.value)"></td>
+      <td class="num">${tStr}</td>
+    </tr>`;
+  }).join('');
+
+  const fs = data.reduce((s,r)=>s+((qty[r.Varenr]||0)*r.Salgsemb_pr_stk),0);
+  const fm = data.reduce((s,r)=>s+((qty[r.Varenr]||0)*r.MC_pr_stk),0);
+  document.getElementById('sum-salg').textContent = f1(fs) + ' kg';
+  document.getElementById('sum-mc').textContent   = f1(fm) + ' kg';
+  document.getElementById('sum-tot').textContent  = f1(fs+fm) + ' kg';
+
+  updateSummary();
+}
+
+function downloadCSV() {
+  const udfyldte = RAW.filter(r => (qty[r.Varenr]||0) > 0);
+  if (udfyldte.length === 0) { alert('Ingen varer med antal købt endnu. Udfyld antal i tabellen først.'); return; }
+
+  const rows = [['Varenr','Beskrivelse','Vaeremaerke','Land','Salgsemb_pr_stk_kg','MC_pr_stk_kg','Total_emb_pr_stk_kg','Antal_koebt','Total_emb_kg']];
+  udfyldte.forEach(r => {
+    const q = qty[r.Varenr];
+    const tot = Math.round(q*r.Total_emb_pr_stk*1000)/1000;
+    rows.push([r.Varenr, '"'+r.Beskrivelse_kort+'"', r.Vaeremaerke, r.Land,
+      r.Salgsemb_pr_stk.toString().replace('.',','),
+      r.MC_pr_stk.toString().replace('.',','),
+      r.Total_emb_pr_stk.toString().replace('.',','),
+      q,
+      tot.toString().replace('.',',')]);
+  });
+
+  const t = getTotals();
+  rows.push([]);
+  rows.push(['','','','','','','','TOTAL', f1(t.total).replace('.',',') + ' kg']);
+
+  const csv = rows.map(r => r.join(';')).join('\n');
+  const blob = new Blob(['\uFEFF' + csv], {type:'text/csv;charset=utf-8;'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'emballage-kids-coolshop-amager.csv';
+  a.click();
+}
+
+function setQty(v, val) { qty[v] = Math.max(0,parseInt(val)||0); render(); }
+function sortBy(col) { if(sortCol===col) sortAsc=!sortAsc; else {sortCol=col;sortAsc=true;} render(); }
+function clearAll() { RAW.forEach(r=>qty[r.Varenr]=0); render(); }
+
+render();
+</script>
+</body>
+</html>
